@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur Repair Fund</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:10px;color:#333}
+h1{text-align:center;color:#00549A;margin-bottom:5px;font-size:26px}
+h2{color:#00549A;font-size:16px;margin:30px 0 10px 0;border-bottom:2px solid #00549A;padding-bottom:5px}
+.subtitle{text-align:center;color:#666;margin-bottom:20px;font-size:14px}
+.container{max-width:98%;margin:0 auto;background:white;padding:20px 15px;border-radius:10px;box-shadow:0 2px 15px rgba(0,0,0,.1)}
+.selector{display:flex;align-items:center;gap:15px;margin:15px 0 10px 0;padding:15px 20px;background:#e8f0f8;border-radius:8px;flex-wrap:wrap}
+.selector label{font-weight:bold;color:#00549A;font-size:15px}
+.selector select{padding:8px 15px;font-size:14px;border:2px solid #00549A;border-radius:5px;background:white;cursor:pointer}
+.bonus-badge{display:inline-block;background:#00549A;color:white;padding:6px 16px;border-radius:20px;font-weight:bold;font-size:14px}
+.excl-badge{display:inline-block;background:#d32f2f;color:white;padding:6px 14px;border-radius:20px;font-weight:600;font-size:12px}
+.excl-badge span{font-weight:bold;text-decoration:underline}
+.docs-panel{margin:20px 0 25px 0;padding:18px 20px;background:linear-gradient(135deg,#f0f6fc 0%,#e8f0f8 100%);border-radius:10px;border-left:5px solid #00549A}
+.docs-panel h3{color:#00549A;font-size:17px;margin-bottom:5px}
+.docs-panel .docs-sub{color:#555;font-size:13px;margin-bottom:15px;font-style:italic}
+.docs-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.doc-card{background:white;border-radius:8px;padding:18px 20px;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .25s ease;display:flex;flex-direction:column}
+.doc-card.blue{border-color:#00549A}
+.doc-card.green{border-color:#2E7D32}
+.doc-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.doc-card .doc-icon{font-size:32px;margin-bottom:8px}
+.doc-card .doc-title{font-size:15px;font-weight:bold;margin-bottom:6px}
+.doc-card.blue .doc-title{color:#00549A}
+.doc-card.green .doc-title{color:#2E7D32}
+.doc-card .doc-desc{color:#555;font-size:12.5px;line-height:1.5;margin-bottom:14px;flex:1}
+.doc-card .doc-btn{display:inline-block;padding:9px 16px;border-radius:6px;color:white;text-decoration:none;font-weight:600;font-size:13px;text-align:center}
+.doc-card.blue .doc-btn{background:#00549A}
+.doc-card.blue .doc-btn:hover{background:#003d73}
+.doc-card.green .doc-btn{background:#2E7D32}
+.doc-card.green .doc-btn:hover{background:#1b5e20}
+@media(max-width:800px){.docs-grid{grid-template-columns:1fr}}
+.table-wrap{overflow-x:auto;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{border:1px solid #bbb;padding:7px 6px;text-align:center}
+th{background:#00549A;color:white;font-size:11.5px;font-weight:600}
+th.group{background:#003d73;font-size:13px}
+td.plan-name{text-align:left;background:#e8f0f8;font-weight:bold;color:#00549A;padding-left:12px;min-width:140px;font-size:13px}
+.cost-blue{background:#dce8f5!important;font-weight:bold;color:#00549A}
+.cost-green{background:#d4edda!important;font-weight:bold;color:#155724}
+.months-off{background:#ffe0cc!important;font-weight:bold;color:#c0392b;font-size:13px}
+.savings-row td{background:#fff8e1;font-weight:bold;color:#7a6000}
+.legend{margin-top:20px;padding:12px 15px;background:#f8f9fa;border-radius:6px;font-size:12px;color:#555;line-height:1.6;border-left:4px solid #00549A}
+.legend b{color:#00549A}
+.legend .orange{color:#c0392b;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📋 Simulateur Repair Fund</h1>
+<p class="subtitle">Simulateur de coût client — Comparaison détaillée des offres</p>
+
+<div class="selector">
+  <label>🔧 Type de produit :</label>
+  <select id="product" onchange="calculate()">
+    <option value="50">Lave-linge / Sèche-linge / Lave-vaisselle</option>
+    <option value="25">Réfrigérateur / Congélateur / Four / Plaque / Cuisinière / Hotte</option>
+    <option value="20">Micro-ondes</option>
+  </select>
+  <span class="bonus-badge" id="bonusDisplay">Bonus réparation : -50€</span>
+  <span class="excl-badge">⛔ <span>Exclusions :</span> Clients professionnels · Dommages accidentels</span>
+</div>
+
+<div class="docs-panel">
+  <h3>📎 Documents de référence</h3>
+  <p class="docs-sub">Documents joints à consulter pour la nouvelle offre</p>
+  <div class="docs-grid">
+    <div class="doc-card blue">
+      <div class="doc-icon">📄</div>
+      <div class="doc-title">CGS — Conditions Générales de Service</div>
+      <div class="doc-desc">Proposition mise à jour intégrant la nouvelle offre d'abonnement avec Bonus Réparation.</div>
+      <a class="doc-btn" href="FR Conditions Générales de Service proposition nouvelle offre abonnement.docx" download>⬇ Télécharger le document Word</a>
+    </div>
+    <div class="doc-card green">
+      <div class="doc-icon">🧾</div>
+      <div class="doc-title">Exemple de facture</div>
+      <div class="doc-desc">Facture client type intégrant la déduction du Bonus Réparation Ecosystem.</div>
+      <a class="doc-btn" href="Facture Bonus Eco.pdf" target="_blank">⬇ Télécharger le PDF</a>
+    </div>
+  </div>
+</div>
+
+<h2>📊 Détail Année 1 / Année 2 — Par formule</h2>
+<div class="table-wrap" id="section1"></div>
+
+<h2>📈 Projection 5 ans — Sans panne intermédiaire</h2>
+<div class="table-wrap" id="section2"></div>
+
+<h2>📈 Projection 5 ans — Avec pannes (Année 2 & Année 5)</h2>
+<div class="table-wrap" id="section3"></div>
+
+<div class="legend">
+<p><b>Bonus réparation :</b> montant déduit du prix de la réparation selon le type de produit.</p>
+<p><b class="orange">Réduction abonnement (mois offerts) :</b> mensualités offertes en contrepartie du bonus (Nouvelle Offre lors d'une panne).</p>
+<p><b>Garantie :</b> Solo = 3 mois / Intervention Plus & Nouvelle Offre = 1 an.</p>
+<p style="margin-top:6px;font-style:italic;color:#888;">* Montant maximum facturé au client selon le produit. Prix TTC en euros.</p>
+</div>
+
+</div>
+
+<script>
+function f(v){if(v===''||v===null||v===undefined)return '—';if(typeof v==='string')return v;return v.toFixed(2)+'€';}
+function calculate(){
+  const bonusAbs=parseFloat(document.getElementById('product').value);
+  const bonus=-bonusAbs;
+  document.getElementById('bonusDisplay').textContent='Bonus réparation : '+bonus+'€';
+  const m1=17.99,m2=9.49,m3=9.99,m4=10.49,m5=10.99;
+  const solo={y1:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
+    y2n:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
+    y2y:{repair:179,monthly:0,annual:179,bonus:bonus,monthsOff:'—',warranty:'3 mois',cost:179+bonus}};
+  const plus={y1:{repair:0,monthly:m1,annual:m1*12,bonus:0,warranty:'1 an',cost:m1*12},
+    y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
+    y2y:{repair:'',monthly:m2,annual:m2*12,bonus:0,monthsOff:0,warranty:'1 an',cost:m2*12}};
+  const no_y1_annual=215.88;
+  const no_y1_monthly=(no_y1_annual-bonusAbs)/12;
+  const no_y2y_monthsOff=Math.floor(bonusAbs/m2);
+  const no_y2y_annual_display=m2*12+bonusAbs;
+  const no_y2y_cost=no_y2y_annual_display+bonus-(no_y2y_monthsOff*m2);
+  const newO={y1:{repair:bonusAbs,monthly:no_y1_monthly,annual:no_y1_annual,bonus:bonus,warranty:'1 an',cost:no_y1_annual+bonus},
+    y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
+    y2y:{repair:bonusAbs,monthly:m2,annual:no_y2y_annual_display,bonus:bonus,monthsOff:no_y2y_monthsOff,warranty:'1 an',cost:no_y2y_cost}};
+
+  let h='<table><tr>';
+  h+='<th rowspan="2" style="min-width:140px">Formule</th>';
+  h+='<th class="group" colspan="5">Année 1</th>';
+  h+='<th class="group" colspan="5">Année 2 — Sans panne</th>';
+  h+='<th class="group" colspan="7">Année 2 — Avec panne</th></tr><tr>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Coût client</th>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Coût client</th>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Mois offerts</th><th>Garantie</th><th>Coût client</th></tr>';
+
+  function planRows(name,data,isNew){
+    let r='';let c=isNew?'cost-green':'cost-blue';
+    r+='<tr><td class="plan-name">'+name+'</td>';
+    r+='<td>'+f(data.y1.repair)+'</td><td>'+f(data.y1.monthly)+'</td><td>'+f(data.y1.annual)+'</td><td>'+f(data.y1.bonus)+'</td><td class="'+c+'">'+f(data.y1.cost)+'</td>';
+    r+='<td>'+f(data.y2n.repair)+'</td><td>'+f(data.y2n.monthly)+'</td><td>'+f(data.y2n.annual)+'</td><td>'+f(data.y2n.bonus)+'</td><td class="'+c+'">'+f(data.y2n.cost)+'</td>';
+    r+='<td>'+f(data.y2y.repair)+'</td><td>'+f(data.y2y.monthly)+'</td><td>'+f(data.y2y.annual)+'</td><td>'+f(data.y2y.bonus)+'</td>';
+    if(isNew&&data.y2y.monthsOff>0){r+='<td class="months-off">'+data.y2y.monthsOff+' mois offerts</td>';}
+    else{r+='<td>'+(data.y2y.monthsOff!==undefined?data.y2y.monthsOff:'—')+'</td>';}
+    r+='<td>'+data.y2y.warranty+'</td><td class="'+c+'">'+f(data.y2y.cost)+'</td></tr>';
+    return r;
+  }
+  h+=planRows('Solo',solo,false);
+  h+=planRows('Intervention Plus',plus,false);
+  h+=planRows('Nouvelle Offre',newO,true);
+  h+='</table>';
+  document.getElementById('section1').innerHTML=h;
+
+  const a1=m1*12,a2=m2*12,a3=m3*12,a4=m4*12,a5=m5*12;
+  const rp_total=a1+a2
