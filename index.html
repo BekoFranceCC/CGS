@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simulateur Repair Fund — Coût Client</title>
+<title>Simulateur Repair Fund</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;padding:10px;color:#333}
@@ -18,11 +18,9 @@ h2{color:#00549A;font-size:16px;margin:30px 0 10px 0;border-bottom:2px solid #00
 .excl-badge{display:inline-block;background:#d32f2f;color:white;padding:6px 14px;border-radius:20px;font-weight:600;font-size:12px}
 .excl-badge span{font-weight:bold;text-decoration:underline}
 .context-panel{margin:0 0 20px 0}
-.context-panel details{background:#f0f6fc;border-left:4px solid #00549A;border-radius:6px;padding:0}
+.context-panel details{background:#f0f6fc;border-left:4px solid #00549A;border-radius:6px}
 .context-panel summary{cursor:pointer;padding:12px 18px;font-size:15px;font-weight:bold;color:#00549A;list-style:none}
 .context-panel summary::-webkit-details-marker{display:none}
-.context-panel summary::before{content:"▶ ";font-size:12px}
-.context-panel details[open] summary::before{content:"▼ "}
 .context-body{padding:5px 20px 18px 20px;font-size:13px;line-height:1.7;color:#444}
 .context-body h3{color:#00549A;font-size:14px;margin:14px 0 6px 0;border-bottom:1px solid #ccdae8;padding-bottom:3px}
 .context-body h3:first-child{margin-top:0}
@@ -44,7 +42,7 @@ h2{color:#00549A;font-size:16px;margin:30px 0 10px 0;border-bottom:2px solid #00
 .doc-card.blue .doc-title{color:#00549A}
 .doc-card.green .doc-title{color:#2E7D32}
 .doc-card .doc-desc{color:#555;font-size:12.5px;line-height:1.5;margin-bottom:14px;flex:1}
-.doc-card .doc-btn{display:inline-block;padding:9px 16px;border-radius:6px;color:white;text-decoration:none;font-weight:600;font-size:13px;text-align:center;transition:background .2s ease}
+.doc-card .doc-btn{display:inline-block;padding:9px 16px;border-radius:6px;color:white;text-decoration:none;font-weight:600;font-size:13px;text-align:center}
 .doc-card.blue .doc-btn{background:#00549A}
 .doc-card.blue .doc-btn:hover{background:#003d73}
 .doc-card.green .doc-btn{background:#2E7D32}
@@ -54,7 +52,7 @@ h2{color:#00549A;font-size:16px;margin:30px 0 10px 0;border-bottom:2px solid #00
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th,td{border:1px solid #bbb;padding:7px 6px;text-align:center;vertical-align:middle}
 th{background:#00549A;color:white;font-size:11.5px;font-weight:600}
-th.group{background:#003d73;font-size:13px;letter-spacing:.5px}
+th.group{background:#003d73;font-size:13px}
 td.plan-name{text-align:left;background:#e8f0f8;font-weight:bold;color:#00549A;padding-left:12px;min-width:140px;font-size:13px}
 .cost-blue{background:#dce8f5!important;font-weight:bold;color:#00549A}
 .cost-green{background:#d4edda!important;font-weight:bold;color:#155724}
@@ -68,154 +66,131 @@ td.plan-name{text-align:left;background:#e8f0f8;font-weight:bold;color:#00549A;p
 <body>
 <div class="container">
 
-<h1>📋 Simulateur Repair Fund</h1>
-<p class="subtitle">Simulateur de coût client — Comparaison détaillée des offres</p>
+<h1>Simulateur Repair Fund</h1>
+<p class="subtitle">Simulateur de cout client - Comparaison detaillee des offres</p>
 
 <div class="selector">
-  <label>🔧 Type de produit :</label>
+  <label>Type de produit :</label>
   <select id="product" onchange="calculate()">
-    <option value="50">Lave-linge / Sèche-linge / Lave-vaisselle</option>
-    <option value="25">Réfrigérateur / Congélateur / Four / Plaque / Cuisinière / Hotte</option>
+    <option value="50">Lave-linge / Seche-linge / Lave-vaisselle</option>
+    <option value="25">Refrigerateur / Congelateur / Four / Plaque / Cuisiniere / Hotte</option>
     <option value="20">Micro-ondes</option>
   </select>
-  <span class="bonus-badge" id="bonusDisplay">Bonus réparation : -50€</span>
-  <span class="excl-badge">⛔ <span>Exclusions :</span> Clients professionnels · Dommages accidentels</span>
+  <span class="bonus-badge" id="bonusDisplay">Bonus reparation : -50 EUR</span>
+  <span class="excl-badge"><span>Exclusions :</span> Clients professionnels - Dommages accidentels</span>
 </div>
 
 <div class="context-panel">
 <details>
-<summary>ℹ️ Contexte Repair Fund & Éligibilité — Cliquer pour développer</summary>
+<summary>Contexte Repair Fund et Eligibilite - Cliquer pour developper</summary>
 <div class="context-body">
-<h3>📌 Situation actuelle</h3>
+<h3>Situation actuelle</h3>
 <ul>
-  <li>Le <b>Fonds Réparation</b> finance les réparations hors garantie.</li>
-  <li>Les contrats FRP sont éligibles ; <b>les abonnements ne le sont pas actuellement</b> (paiements mensuels, composante assurance D&G, modèle multi-services, facturation par l'assureur).</li>
+<li>Le <b>Fonds Reparation</b> finance les reparations hors garantie.</li>
+<li>Les contrats FRP sont eligibles ; <b>les abonnements ne le sont pas actuellement</b>.</li>
 </ul>
-<h3>✅ Ouverture réglementaire</h3>
-<p>Les autorités (<b>DGCCRF</b> — Direction Générale de la Concurrence, de la Consommation et de la Répression des Fraudes) acceptent désormais les abonnements sous <b>5 conditions</b> :</p>
+<h3>Ouverture reglementaire</h3>
+<p>La <b>DGCCRF</b> accepte desormais les abonnements sous <b>5 conditions</b> :</p>
 <ul>
-  <li>Le bonus doit être <b>versé directement au consommateur</b>.</li>
-  <li>L'abonnement doit couvrir uniquement la <b>réparation technique hors garantie</b>.</li>
-  <li>L'assurance s'applique uniquement sans mention d'extension de garantie ou si le produit est irréparable.</li>
-  <li>Documentation obligatoire : <b>Compte-Rendu d'Intervention (CRI)</b> détaillé + <b>fichier Excel</b> des contributions cumulées.</li>
-  <li>Le bonus est <b>plafonné</b> selon les contributions totales et le montant maximum par catégorie de produit.</li>
+<li>Bonus verse directement au consommateur</li>
+<li>Abonnement couvrant uniquement la reparation hors garantie</li>
+<li>Assurance sans mention d'extension de garantie</li>
+<li>Documentation obligatoire (CRI + fichier Excel)</li>
+<li>Bonus plafonne par categorie de produit</li>
 </ul>
-<p>Pas d'audit supplémentaire requis. Modèles de référence : <span class="highlight">Darty Max / Boulanger Infinity</span> (déjà conformes).<br>
-Assurance D&G : <b>non bloquante</b> tant que les réparations et la documentation sont produites par nous.</p>
-<h3>🎯 Objectif Nouvelle Offre</h3>
+<p>Modeles de reference : <span class="highlight">Darty Max / Boulanger Infinity</span>.</p>
+<h3>Objectif Nouvelle Offre</h3>
 <ul>
-  <li>Les formules <b>R&P et Easy Care deviennent éligibles</b> au bonus réparation (après ajustement).</li>
-  <li>Tarif client réduit → <b>meilleur taux de conversion</b> (jusqu'à <span class="highlight">50€ de réduction</span> sur le prix R&P).</li>
-  <li>Les clients bénéficient du bonus en cas de panne pendant la période d'abonnement.</li>
+<li>R&P et Easy Care eligibles au bonus (jusqu'a <span class="highlight">50 EUR de reduction</span>)</li>
+<li>Meilleur taux de conversion client</li>
+<li>Benefice du bonus en cas de panne pendant l'abonnement</li>
 </ul>
-<h3>⚙️ Prérequis clés</h3>
-<ul>
-  <li>Adapter la tarification des abonnements D&G pour que le bonus puisse être appliqué dès la <b>première intervention</b>.</li>
-  <li>Mettre à jour les CGS pour supprimer toute notion d'<b>« extension de garantie »</b> (Ecosystem ne vérifie que les CGS EAS).</li>
-  <li>Clarifier les flux entre D&G, Ecosystem et EAS.</li>
-  <li>Ajustements IT et comptables nécessaires.</li>
-</ul>
-<h3>📄 Documents requis</h3>
+<h3>Documents requis</h3>
 <div class="doc-box">
-  <p><b>CRI (Compte-Rendu d'Intervention) :</b> panne technique, produit, numéro de série, montant du bonus, exclusions, garantie 3 mois.</p>
-  <p><b>Fichier de contrôle :</b> numéro d'abonnement, contributions cumulées, montant du bonus, numéro de dossier, dates.</p>
+<p><b>CRI :</b> panne, produit, N serie, montant bonus, exclusions, garantie 3 mois.</p>
+<p><b>Fichier de controle :</b> N abonnement, contributions cumulees, bonus, dates.</p>
 </div>
-<h3>📝 Notes spécifiques</h3>
-<ul>
-  <li><b>Easy Care</b> pourrait devenir éligible <b>uniquement après 2 ans</b>, si repositionné comme service de réparation hors garantie.</li>
-</ul>
 </div>
 </details>
 </div>
 
 <div class="docs-panel">
-  <h3>📎 Documents de référence</h3>
-  <p class="docs-sub">Documents joints à consulter pour la nouvelle offre</p>
+  <h3>Documents de reference</h3>
+  <p class="docs-sub">Documents joints a consulter pour la nouvelle offre</p>
   <div class="docs-grid">
     <div class="doc-card blue">
-      <div class="doc-icon">📄</div>
-      <div class="doc-title">CGS — Conditions Générales de Service</div>
-      <div class="doc-desc">Proposition mise à jour intégrant la nouvelle offre d'abonnement avec Bonus Réparation.</div>
-      <a class="doc-btn" href="FR Conditions Générales de Service proposition nouvelle offre abonnement.docx" download>⬇ Télécharger le document Word</a>
+      <div class="doc-icon">DOC</div>
+      <div class="doc-title">CGS - Conditions Generales de Service</div>
+      <div class="doc-desc">Proposition mise a jour integrant la nouvelle offre d'abonnement avec Bonus Reparation.</div>
+      FR Conditions Générales de Service proposition nouvelle offre abonnement.docx
     </div>
     <div class="doc-card green">
-      <div class="doc-icon">🧾</div>
+      <div class="doc-icon">PDF</div>
       <div class="doc-title">Exemple de facture</div>
-      <div class="doc-desc">Facture client type intégrant la déduction du Bonus Réparation Ecosystem.</div>
-      <a class="doc-btn" href="Facture Bonus Eco.pdf" target="_blank">⬇ Télécharger le PDF</a>
+      <div class="doc-desc">Facture client type integrant la deduction du Bonus Reparation Ecosystem.</div>
+      Facture Bonus Eco.pdf">Telecharger le PDF</a>
     </div>
   </div>
 </div>
 
-<h2>📊 Détail Année 1 / Année 2 — Par formule</h2>
+<h2>Detail Annee 1 / Annee 2 - Par formule</h2>
 <div class="table-wrap" id="section1"></div>
 
-<h2>📈 Projection 5 ans — Sans panne intermédiaire</h2>
+<h2>Projection 5 ans - Sans panne intermediaire</h2>
 <div class="table-wrap" id="section2"></div>
 
-<h2>📈 Projection 5 ans — Avec pannes (Année 2 & Année 5)</h2>
+<h2>Projection 5 ans - Avec pannes (Annee 2 et Annee 5)</h2>
 <div class="table-wrap" id="section3"></div>
 
 <div class="legend">
-  <p><b>Bonus réparation :</b> montant déduit du prix de la réparation selon le type de produit.</p>
-  <p><b class="orange">Réduction abonnement (mois offerts) :</b> nombre de mensualités offertes au client en contrepartie du bonus réparation. Appliqué uniquement avec la <b>Nouvelle Offre</b> lors d'une panne.</p>
-  <p><b>Garantie :</b> Solo = 3 mois / Intervention Plus & Nouvelle Offre = 1 an.</p>
-  <p style="margin-top:6px;font-style:italic;color:#888;">* Montant maximum pouvant être facturé au client selon le produit. Prix TTC en euros.</p>
+<p><b>Bonus reparation :</b> montant deduit du prix de la reparation selon le type de produit.</p>
+<p><b class="orange">Reduction abonnement (mois offerts) :</b> mensualites offertes en contrepartie du bonus (Nouvelle Offre lors d'une panne).</p>
+<p><b>Garantie :</b> Solo = 3 mois / Intervention Plus et Nouvelle Offre = 1 an.</p>
+<p style="margin-top:6px;font-style:italic;color:#888;">* Montant maximum facture au client selon le produit. Prix TTC en EUR.</p>
 </div>
 
 </div>
 
 <script>
-function f(v){
-  if(v===''||v===null||v===undefined)return '—';
-  if(typeof v==='string')return v;
-  return v.toFixed(2)+'€';
-}
+function f(v){if(v===''||v===null||v===undefined)return '-';if(typeof v==='string')return v;return v.toFixed(2)+' EUR';}
 function calculate(){
-  const bonusAbs=parseFloat(document.getElementById('product').value);
-  const bonus=-bonusAbs;
-  document.getElementById('bonusDisplay').textContent='Bonus réparation : '+bonus+'€';
-  const m1=17.99,m2=9.49,m3=9.99,m4=10.49,m5=10.99;
+  var bonusAbs=parseFloat(document.getElementById('product').value);
+  var bonus=-bonusAbs;
+  document.getElementById('bonusDisplay').textContent='Bonus reparation : '+bonus+' EUR';
+  var m1=17.99,m2=9.49,m3=9.99,m4=10.49,m5=10.99;
 
-  const solo={
-    y1:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
-    y2n:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
-    y2y:{repair:179,monthly:0,annual:179,bonus:bonus,monthsOff:'—',warranty:'3 mois',cost:179+bonus}
-  };
-  const plus={
-    y1:{repair:0,monthly:m1,annual:m1*12,bonus:0,warranty:'1 an',cost:m1*12},
-    y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
-    y2y:{repair:'',monthly:m2,annual:m2*12,bonus:0,monthsOff:0,warranty:'1 an',cost:m2*12}
-  };
-  const no_y1_annual=215.88;
-  const no_y1_monthly=(no_y1_annual-bonusAbs)/12;
-  const no_y2y_monthsOff=Math.floor(bonusAbs/m2);
-  const no_y2y_annual_display=m2*12+bonusAbs;
-  const no_y2y_cost=no_y2y_annual_display+bonus-(no_y2y_monthsOff*m2);
-  const newO={
-    y1:{repair:bonusAbs,monthly:no_y1_monthly,annual:no_y1_annual,bonus:bonus,warranty:'1 an',cost:no_y1_annual+bonus},
-    y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
-    y2y:{repair:bonusAbs,monthly:m2,annual:no_y2y_annual_display,bonus:bonus,monthsOff:no_y2y_monthsOff,warranty:'1 an',cost:no_y2y_cost}
-  };
+  var solo={y1:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
+            y2n:{repair:179,monthly:0,annual:179,bonus:bonus,warranty:'3 mois',cost:179+bonus},
+            y2y:{repair:179,monthly:0,annual:179,bonus:bonus,monthsOff:'-',warranty:'3 mois',cost:179+bonus}};
+  var plus={y1:{repair:0,monthly:m1,annual:m1*12,bonus:0,warranty:'1 an',cost:m1*12},
+            y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
+            y2y:{repair:'',monthly:m2,annual:m2*12,bonus:0,monthsOff:0,warranty:'1 an',cost:m2*12}};
+  var no_y1_annual=215.88;
+  var no_y1_monthly=(no_y1_annual-bonusAbs)/12;
+  var no_y2y_monthsOff=Math.floor(bonusAbs/m2);
+  var no_y2y_annual_display=m2*12+bonusAbs;
+  var no_y2y_cost=no_y2y_annual_display+bonus-(no_y2y_monthsOff*m2);
+  var newO={y1:{repair:bonusAbs,monthly:no_y1_monthly,annual:no_y1_annual,bonus:bonus,warranty:'1 an',cost:no_y1_annual+bonus},
+            y2n:{repair:'',monthly:m2,annual:m2*12,bonus:0,warranty:'1 an',cost:m2*12},
+            y2y:{repair:bonusAbs,monthly:m2,annual:no_y2y_annual_display,bonus:bonus,monthsOff:no_y2y_monthsOff,warranty:'1 an',cost:no_y2y_cost}};
 
-  // SECTION 1
-  let h='<table><tr>';
+  var h='<table><tr>';
   h+='<th rowspan="2" style="min-width:140px">Formule</th>';
-  h+='<th class="group" colspan="5">Année 1</th>';
-  h+='<th class="group" colspan="5">Année 2 — Sans panne</th>';
-  h+='<th class="group" colspan="7">Année 2 — Avec panne</th></tr><tr>';
-  h+='<th>Prix comptant réparation</th><th>Mensuel</th><th>Prix total annuel</th><th>Bonus réparation</th><th>Coût client</th>';
-  h+='<th>Prix comptant réparation</th><th>Mensuel</th><th>Prix total annuel</th><th>Bonus réparation</th><th>Coût client</th>';
-  h+='<th>Prix comptant réparation</th><th>Mensuel</th><th>Prix total annuel</th><th>Bonus réparation</th><th>Mois offerts</th><th>Garantie</th><th>Coût client</th></tr>';
+  h+='<th class="group" colspan="5">Annee 1</th>';
+  h+='<th class="group" colspan="5">Annee 2 - Sans panne</th>';
+  h+='<th class="group" colspan="7">Annee 2 - Avec panne</th></tr><tr>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Cout client</th>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Cout client</th>';
+  h+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th><th>Mois offerts</th><th>Garantie</th><th>Cout client</th></tr>';
 
   function planRows(name,data,isNew){
-    let r='';let c=isNew?'cost-green':'cost-blue';
+    var r='';var c=isNew?'cost-green':'cost-blue';
     r+='<tr><td class="plan-name">'+name+'</td>';
     r+='<td>'+f(data.y1.repair)+'</td><td>'+f(data.y1.monthly)+'</td><td>'+f(data.y1.annual)+'</td><td>'+f(data.y1.bonus)+'</td><td class="'+c+'">'+f(data.y1.cost)+'</td>';
     r+='<td>'+f(data.y2n.repair)+'</td><td>'+f(data.y2n.monthly)+'</td><td>'+f(data.y2n.annual)+'</td><td>'+f(data.y2n.bonus)+'</td><td class="'+c+'">'+f(data.y2n.cost)+'</td>';
     r+='<td>'+f(data.y2y.repair)+'</td><td>'+f(data.y2y.monthly)+'</td><td>'+f(data.y2y.annual)+'</td><td>'+f(data.y2y.bonus)+'</td>';
-    if(isNew&&data.y2y.monthsOff>0){r+='<td class="months-off">'+data.y2y.monthsOff+' mois offerts</td>';}
-    else{r+='<td>'+(data.y2y.monthsOff!==undefined?data.y2y.monthsOff:'—')+'</td>';}
+    if(isNew && data.y2y.monthsOff>0){r+='<td class="months-off">'+data.y2y.monthsOff+' mois offerts</td>';}
+    else{r+='<td>'+(data.y2y.monthsOff!==undefined?data.y2y.monthsOff:'-')+'</td>';}
     r+='<td>'+data.y2y.warranty+'</td><td class="'+c+'">'+f(data.y2y.cost)+'</td></tr>';
     return r;
   }
@@ -225,47 +200,45 @@ function calculate(){
   h+='</table>';
   document.getElementById('section1').innerHTML=h;
 
-  // SECTION 2 — 5-year no breakdown
-  const a1=m1*12,a2=m2*12,a3=m3*12,a4=m4*12,a5=m5*12;
-  const rp_y1_cost=a1;
-  const rp_total=rp_y1_cost+a2+a3+a4+a5;
-  const no5_y1_cost=newO.y1.cost;
-  const no5_total=no5_y1_cost+a2+a3+a4+a5;
+  var a1=m1*12,a2=m2*12,a3=m3*12,a4=m4*12,a5=m5*12;
+  var rp_y1_cost=a1;
+  var rp_total=rp_y1_cost+a2+a3+a4+a5;
+  var no5_y1_cost=newO.y1.cost;
+  var no5_total=no5_y1_cost+a2+a3+a4+a5;
 
-  let h2='<table><tr><th rowspan="2" style="min-width:140px">Formule</th>';
-  h2+='<th class="group" colspan="4">Année 1</th><th class="group" colspan="2">Année 2</th><th class="group" colspan="2">Année 3</th><th class="group" colspan="2">Année 4</th><th class="group" colspan="2">Année 5</th><th class="group">Total</th></tr><tr>';
-  h2+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th>';
+  var h2='<table><tr><th rowspan="2" style="min-width:140px">Formule</th>';
+  h2+='<th class="group" colspan="4">Annee 1</th><th class="group" colspan="2">Annee 2</th><th class="group" colspan="2">Annee 3</th><th class="group" colspan="2">Annee 4</th><th class="group" colspan="2">Annee 5</th><th class="group">Total</th></tr><tr>';
+  h2+='<th>Comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th>';
   h2+='<th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th>';
-  h2+='<th>Coût client</th></tr>';
+  h2+='<th>Cout client</th></tr>';
   h2+='<tr><td class="plan-name">R&amp;P (Intervention Plus)</td><td>'+f(0)+'</td><td>'+f(m1)+'</td><td>'+f(a1)+'</td><td>'+f(0)+'</td><td>'+f(m2)+'</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(a5)+'</td><td class="cost-blue">'+f(rp_total)+'</td></tr>';
   h2+='<tr><td class="plan-name">Nouvelle Offre</td><td>'+f(bonusAbs)+'</td><td>'+f(no_y1_monthly)+'</td><td>'+f(no_y1_annual)+'</td><td>'+f(bonus)+'</td><td>'+f(m2)+'</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(a5)+'</td><td class="cost-green">'+f(no5_total)+'</td></tr>';
-  h2+='<tr class="savings-row"><td class="plan-name" style="color:#7a6000">Économie Nouvelle Offre</td><td>'+f(bonus)+'</td><td></td><td></td><td></td><td></td><td>0.00€</td><td></td><td>0.00€</td><td></td><td>0.00€</td><td></td><td>0.00€</td><td class="cost-green">'+f(no5_total-rp_total)+'</td></tr>';
+  h2+='<tr class="savings-row"><td class="plan-name" style="color:#7a6000">Economie Nouvelle Offre</td><td>'+f(bonus)+'</td><td></td><td></td><td></td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td class="cost-green">'+f(no5_total-rp_total)+'</td></tr>';
   h2+='</table>';
   document.getElementById('section2').innerHTML=h2;
 
-  // SECTION 3 — 5-year with breakdowns Y2 & Y5
-  const rp_b_total=rp_total;
-  const no_y2b_cost=no_y2y_cost;
-  const no_y5b_monthsOff=Math.floor(bonusAbs/m5);
-  const no_y5b_annual_display=a5+bonusAbs;
-  const no_y5b_cost=no_y5b_annual_display+bonus-(no_y5b_monthsOff*m5);
-  const no_b_total=no5_y1_cost+no_y2b_cost+a3+a4+no_y5b_cost;
+  var rp_b_total=rp_total;
+  var no_y2b_cost=no_y2y_cost;
+  var no_y5b_monthsOff=Math.floor(bonusAbs/m5);
+  var no_y5b_annual_display=a5+bonusAbs;
+  var no_y5b_cost=no_y5b_annual_display+bonus-(no_y5b_monthsOff*m5);
+  var no_b_total=no5_y1_cost+no_y2b_cost+a3+a4+no_y5b_cost;
 
-  let h3='<table><tr><th rowspan="2" style="min-width:140px">Formule</th>';
-  h3+='<th class="group" colspan="4">Année 1</th><th class="group" colspan="5">Année 2 (panne)</th><th class="group" colspan="2">Année 3</th><th class="group" colspan="2">Année 4</th><th class="group" colspan="5">Année 5 (panne)</th><th class="group">Total</th></tr><tr>';
-  h3+='<th>Prix comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th>';
-  h3+='<th>Mensuel</th><th>Prix comptant</th><th>Bonus</th><th>Mois offerts</th><th>Coût annuel</th>';
+  var h3='<table><tr><th rowspan="2" style="min-width:140px">Formule</th>';
+  h3+='<th class="group" colspan="4">Annee 1</th><th class="group" colspan="5">Annee 2 (panne)</th><th class="group" colspan="2">Annee 3</th><th class="group" colspan="2">Annee 4</th><th class="group" colspan="5">Annee 5 (panne)</th><th class="group">Total</th></tr><tr>';
+  h3+='<th>Comptant</th><th>Mensuel</th><th>Annuel</th><th>Bonus</th>';
+  h3+='<th>Mensuel</th><th>Comptant</th><th>Bonus</th><th>Mois offerts</th><th>Cout annuel</th>';
   h3+='<th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th>';
-  h3+='<th>Mensuel</th><th>Prix comptant</th><th>Bonus</th><th>Mois offerts</th><th>Coût annuel</th>';
-  h3+='<th>Coût client</th></tr>';
+  h3+='<th>Mensuel</th><th>Comptant</th><th>Bonus</th><th>Mois offerts</th><th>Cout annuel</th>';
+  h3+='<th>Cout client</th></tr>';
   h3+='<tr><td class="plan-name">R&amp;P (Intervention Plus)</td><td>'+f(0)+'</td><td>'+f(m1)+'</td><td>'+f(a1)+'</td><td>'+f(0)+'</td><td>'+f(m2)+'</td><td>'+f(0)+'</td><td>'+f(0)+'</td><td>0</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(0)+'</td><td>'+f(0)+'</td><td>0</td><td>'+f(a5)+'</td><td class="cost-blue">'+f(rp_b_total)+'</td></tr>';
   h3+='<tr><td class="plan-name">Nouvelle Offre</td><td>'+f(bonusAbs)+'</td><td>'+f(no_y1_monthly)+'</td><td>'+f(no_y1_annual)+'</td><td>'+f(bonus)+'</td><td>'+f(m2)+'</td><td>'+f(bonusAbs)+'</td><td>'+f(bonus)+'</td><td class="months-off">'+no_y2y_monthsOff+' mois</td><td class="cost-green">'+f(no_y2b_cost)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(bonusAbs)+'</td><td>'+f(bonus)+'</td><td class="months-off">'+no_y5b_monthsOff+' mois</td><td class="cost-green">'+f(no_y5b_cost)+'</td><td class="cost-green">'+f(no_b_total)+'</td></tr>';
 
-  const diff_y1=no5_y1_cost-rp_y1_cost;
-  const diff_y2=no_y2b_cost-a2;
-  const diff_y5=no_y5b_cost-a5;
-  const diff_total=no_b_total-rp_b_total;
-  h3+='<tr class="savings-row"><td class="plan-name" style="color:#7a6000">Économie / Différence</td><td></td><td></td><td></td><td>'+f(diff_y1)+'</td><td></td><td></td><td></td><td></td><td>'+f(diff_y2)+'</td><td></td><td>0.00€</td><td></td><td>0.00€</td><td></td><td></td><td></td><td></td><td>'+f(diff_y5)+'</td><td style="font-weight:bold;font-size:13px">'+f(diff_total)+'</td></tr>';
+  var diff_y1=no5_y1_cost-rp_y1_cost;
+  var diff_y2=no_y2b_cost-a2;
+  var diff_y5=no_y5b_cost-a5;
+  var diff_total=no_b_total-rp_b_total;
+  h3+='<tr class="savings-row"><td class="plan-name" style="color:#7a6000">Economie / Difference</td><td></td><td></td><td></td><td>'+f(diff_y1)+'</td><td></td><td></td><td></td><td></td><td>'+f(diff_y2)+'</td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td></td><td></td><td></td><td></td><td>'+f(diff_y5)+'</td><td style="font-weight:bold;font-size:13px">'+f(diff_total)+'</td></tr>';
   h3+='</table>';
   document.getElementById('section3').innerHTML=h3;
 }
