@@ -200,7 +200,7 @@ function calculate(){
   h2+='<th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th><th>Mensuel</th><th>Annuel</th>';
   h2+='<th>Cout client</th></tr>';
   h2+='<tr><td class="plan-name">R&amp;P (Intervention Plus)</td><td>'+f(0)+'</td><td>'+f(m1)+'</td><td>'+f(a1)+'</td><td>'+f(0)+'</td><td>'+f(m2)+'</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(a5)+'</td><td class="cost-blue">'+f(rp_total)+'</td></tr>';
-  h2+='<tr><td class="plan-name">Nouvelle Offre</td><td>'+f(bonusAbs)+'</td><td>'+f(no_y1_monthly)+'</td><td>'+f(no_y1_annual)+'</td><td>'+f(bonus)+'</td><td>'+f(m2)+'</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(a5)+'</td><td class="cost-green">'+f(no5_total)+'</td></tr>';
+  h2+='<tr><td class="plan-name">Nouvelle Offre</td><td></td><td></td><td></td><td>'+f(bonusAbs)+'</td><td>'+f(no_y1_monthly)+'</td><td>'+f(no_y1_annual)+'</td><td>'+f(bonus)+'</td><td>'+f(m2)+'</td><td>'+f(a2)+'</td><td>'+f(m3)+'</td><td>'+f(a3)+'</td><td>'+f(m4)+'</td><td>'+f(a4)+'</td><td>'+f(m5)+'</td><td>'+f(a5)+'</td><td class="cost-green">'+f(no5_total)+'</td></tr>';
   h2+='<tr class="savings-row"><td class="plan-name" style="color:#7a6000">Economie Nouvelle Offre</td><td>'+f(bonus)+'</td><td></td><td></td><td></td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td></td><td>0.00 EUR</td><td class="cost-green">'+f(no5_total-rp_total)+'</td></tr>';
   h2+='</table>';
   document.getElementById('section2').innerHTML=h2;
